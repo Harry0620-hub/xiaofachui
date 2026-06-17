@@ -139,12 +139,12 @@ button {
   margin-bottom: 40px;
   opacity: 0.8;
 }
-.start-footer {
-  position: absolute;
-  bottom: 30px;
+.start-creator {
+  margin-top: 32px;
   font-size: 12px;
-  color: var(--gray-light);
-  letter-spacing: 3px;
+  color: var(--gold-soft);
+  letter-spacing: 2px;
+  opacity: 0.7;
 }
 
 /* ===== 按钮通用 ===== */
