@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小法槌 · 法治科普网页游戏</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== 加载页 ===== -->
+  <div id="loading-screen" class="screen active">
+    <div class="loading-content">
+      <div class="loading-gavel">
+        <svg viewBox="0 0 80 80" width="64" height="64">
+          <circle cx="40" cy="40" r="36" fill="none" stroke="#C9A961" stroke-width="2" opacity="0.3"/>
+          <circle cx="40" cy="40" r="36" fill="none" stroke="#C9A961" stroke-width="2" stroke-dasharray="80 200" class="loading-circle"/>
+          <text x="40" y="50" text-anchor="middle" font-size="32" fill="#C9A961">&#9881;</text>
+        </svg>
+      </div>
+      <p class="loading-text">正在加载案卷材料...</p>
+    </div>
+  </div>
+
+  <!-- ===== 开始页 ===== -->
+  <div id="start-screen" class="screen">
+    <div class="start-content">
+      <div class="start-emblem">
+        <svg viewBox="0 0 120 120" width="100" height="100">
+          <circle cx="60" cy="60" r="55" fill="none" stroke="#C9A961" stroke-width="2"/>
+          <circle cx="60" cy="60" r="48" fill="none" stroke="#C9A961" stroke-width="1" opacity="0.5"/>
+          <!-- 法槌图标 -->
+          <g transform="translate(60,60)">
+            <rect x="-4" y="-28" width="8" height="36" rx="2" fill="#C9A961"/>
+            <rect x="-14" y="-30" width="28" height="12" rx="3" fill="#D4AF37"/>
+            <ellipse cx="0" cy="8" rx="22" ry="4" fill="#C9A961" opacity="0.6"/>
+          </g>
+        </svg>
+      </div>
+      <h1 class="start-title">小 法 槌</h1>
+      <p class="start-subtitle">法治科普互动体验</p>
+      <div class="start-divider"></div>
+      <p class="start-desc">以法官助理视角，参与三起真实民事案件的审理全过程<br>阅卷 · 搜证 · 庭审 · 宣判 · 复盘</p>
+      <button class="btn-primary" id="btn-start-game">进入法院</button>
+      <p class="start-footer">青城区人民法院 · 民事审判第一庭</p>
+    </div>
+  </div>
+
+  <!-- ===== 案件选择页 ===== -->
+  <div id="map-screen" class="screen">
+    <div class="map-header">
+      <div class="map-title-area">
+        <h2 class="map-title">案件目录</h2>
+        <p class="map-subtitle">青城区人民法院 · 民事审判第一庭</p>
+      </div>
+      <div class="map-badges" id="map-badges">
+        <!-- 徽章动态生成 -->
+      </div>
+    </div>
+    <div class="map-cases" id="map-cases">
+      <!-- 案件卡片动态生成 -->
+    </div>
+    <div class="map-footer">
+      <button class="btn-ghost" id="btn-reset-progress">重置进度</button>
+    </div>
+  </div>
+
+  <!-- ===== 游戏主界面 ===== -->
+  <div id="game-screen" class="screen">
+    <!-- 顶部状态栏 -->
+    <div class="game-topbar">
+      <button class="btn-back" id="btn-back-to-map">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        返回目录
+      </button>
+      <div class="game-case-info" id="game-case-info">
+        <span class="case-number"></span>
+        <span class="case-cause"></span>
+      </div>
+      <div class="game-progress">
+        <div class="progress-dots" id="progress-dots"></div>
+      </div>
+    </div>
+
+    <!-- 场景渲染区 -->
+    <div class="scene-container" id="scene-container">
+      <!-- SVG场景动态渲染 -->
+    </div>
+
+    <!-- 底部 HUD -->
+    <div class="game-hud" id="game-hud">
+      <!-- 证据栏 -->
+      <div class="evidence-bar" id="evidence-bar">
+        <div class="evidence-bar-label">已入卷证据</div>
+        <div class="evidence-slots" id="evidence-slots"></div>
+      </div>
+      <!-- 操作提示 -->
+      <div class="hud-hint" id="hud-hint">点击场景中发光的物品进行调查</div>
+    </div>
+
+    <!-- 对话弹窗 -->
+    <div class="dialogue-overlay" id="dialogue-overlay">
+      <div class="dialogue-box" id="dialogue-box">
+        <div class="dialogue-avatar" id="dialogue-avatar"></div>
+        <div class="dialogue-content">
+          <div class="dialogue-name" id="dialogue-name"></div>
+          <div class="dialogue-text" id="dialogue-text"></div>
+          <button class="dialogue-next" id="dialogue-next">继续 ▸</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 证据卡片弹窗 -->
+    <div class="evidence-popup-overlay" id="evidence-popup-overlay">
+      <div class="evidence-card" id="evidence-card">
+        <div class="evidence-card-header">
+          <span class="evidence-card-type">证据材料</span>
+          <button class="evidence-card-close" id="evidence-card-close">&times;</button>
+        </div>
+        <div class="evidence-card-icon" id="evidence-card-icon"></div>
+        <h3 class="evidence-card-title" id="evidence-card-title"></h3>
+        <p class="evidence-card-desc" id="evidence-card-desc"></p>
+        <div class="evidence-stamp" id="evidence-stamp">已入卷</div>
+        <button class="btn-primary btn-small" id="evidence-card-confirm">收入卷宗</button>
+      </div>
+    </div>
+
+    <!-- 庭审选择弹窗 -->
+    <div class="trial-overlay" id="trial-overlay">
+      <div class="trial-box">
+        <div class="trial-header">
+          <span class="trial-badge">庭审</span>
+          <span class="trial-court">青城区人民法院 第三民事法庭</span>
+        </div>
+        <div class="trial-judge" id="trial-judge"></div>
+        <div class="trial-question" id="trial-question"></div>
+        <div class="trial-options" id="trial-options"></div>
+        <div class="trial-hint" id="trial-hint"></div>
+      </div>
+    </div>
+
+    <!-- 宣判弹窗 -->
+    <div class="verdict-overlay" id="verdict-overlay">
+      <div class="verdict-box">
+        <div class="verdict-seal"></div>
+        <div class="verdict-header">民事判决书</div>
+        <div class="verdict-case" id="verdict-case"></div>
+        <div class="verdict-content" id="verdict-content"></div>
+        <div class="verdict-law" id="verdict-law"></div>
+        <button class="btn-primary" id="verdict-next">查看法律知识点</button>
+      </div>
+    </div>
+
+    <!-- 法律知识点复盘 -->
+    <div class="knowledge-overlay" id="knowledge-overlay">
+      <div class="knowledge-box">
+        <div class="knowledge-header">
+          <span>法律知识点复盘</span>
+        </div>
+        <div class="knowledge-content" id="knowledge-content"></div>
+        <div class="badge-section" id="badge-section">
+          <div class="badge-display" id="badge-display"></div>
+          <p class="badge-text" id="badge-text"></p>
+        </div>
+        <button class="btn-primary" id="knowledge-finish">返回案件目录</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
