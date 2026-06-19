@@ -283,7 +283,7 @@ button {
   cursor: pointer;
   transition: all 0.4s ease;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 }
 .case-card::before {
   content: '';
@@ -455,7 +455,7 @@ button {
 .scene-container {
   flex: 1;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
   display: flex;
   align-items: center;
   justify-content: center;
