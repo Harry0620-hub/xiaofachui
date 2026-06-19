@@ -1801,80 +1801,31 @@ function showKnowledge() {
 }
 
 /* ========================================================
-   第十五部分：音效系统（轻量化）
-   使用Web Audio API合成简单音效，无需外部文件
+   第十五部分：音频系统集成
+   使用 audioManager (js/audio.js)
    ======================================================== */
-
-let audioCtx = null;
-function getAudioCtx() {
-  if (!audioCtx) {
-    try {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    } catch(e) {}
+  
+  // 兼容层：让原有的playSound调用继续使用
+  function playSound(type) {
+    if (!audioManager.initialized) return;
+    
+    switch(type) {
+      case 'stamp':
+        audioManager.playStampSound();
+        break;
+      case 'gavel':
+        audioManager.playGavelSound();
+        break;
+      case 'badge':
+        audioManager.playBadgeSound();
+        break;
+      case 'click':
+        audioManager.playClickSound();
+        break;
+      default:
+        audioManager.playClickSound();
+    }
   }
-  return audioCtx;
-}
-
-function playSound(type) {
-  const ctx = getAudioCtx();
-  if (!ctx) return;
-
-  const now = ctx.currentTime;
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-
-  switch(type) {
-    case 'stamp':
-      // 盖章声：短促低频
-      osc.frequency.setValueAtTime(200, now);
-      osc.frequency.exponentialRampToValueAtTime(80, now + 0.1);
-      gain.gain.setValueAtTime(0.3, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
-      osc.start(now);
-      osc.stop(now + 0.15);
-      break;
-    case 'gavel':
-      // 法槌声：两次敲击
-      osc.frequency.setValueAtTime(150, now);
-      gain.gain.setValueAtTime(0.4, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-      osc.start(now);
-      osc.stop(now + 0.08);
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-      osc2.connect(gain2);
-      gain2.connect(ctx.destination);
-      osc2.frequency.setValueAtTime(120, now + 0.12);
-      gain2.gain.setValueAtTime(0.3, now + 0.12);
-      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-      osc2.start(now + 0.12);
-      osc2.stop(now + 0.2);
-      break;
-    case 'badge':
-      // 徽章解锁：上行音阶
-      [523, 659, 784].forEach((freq, i) => {
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.connect(g);
-        g.connect(ctx.destination);
-        o.frequency.value = freq;
-        g.gain.setValueAtTime(0.2, now + i * 0.1);
-        g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.3);
-        o.start(now + i * 0.1);
-        o.stop(now + i * 0.1 + 0.3);
-      });
-      break;
-    case 'click':
-      osc.frequency.setValueAtTime(800, now);
-      gain.gain.setValueAtTime(0.1, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
-      osc.start(now);
-      osc.stop(now + 0.05);
-      break;
-  }
-}
 
 /* ========================================================
    第十六部分：事件绑定与初始化
@@ -1888,15 +1839,34 @@ function init() {
     showScreen('start-screen');
   }, 1500);
 
+  // 音频控制按钮
+  document.getElementById('btn-audio-toggle').addEventListener('click', () => {
+    if (!audioManager.initialized) {
+      audioManager.init();
+    }
+    const isMuted = audioManager.toggleMute();
+    const btn = document.getElementById('btn-audio-toggle');
+    btn.classList.toggle('muted', isMuted);
+    btn.querySelector('.audio-icon-on').style.display = isMuted ? 'none' : 'block';
+    btn.querySelector('.audio-icon-off').style.display = isMuted ? 'block' : 'none';
+  });
+
   // 开始游戏
   document.getElementById('btn-start-game').addEventListener('click', () => {
-    playSound('click');
+    // 初始化音频（需要用户交互）
+    if (!audioManager.initialized) {
+      audioManager.init();
+    }
+    audioManager.playClickSound();
+    audioManager.startBGM();
+    
     renderMapScreen();
     showScreen('map-screen');
   });
 
   // 返回目录
   document.getElementById('btn-back-to-map').addEventListener('click', () => {
+    audioManager.playClickSound();
     renderMapScreen();
     showScreen('map-screen');
   });
