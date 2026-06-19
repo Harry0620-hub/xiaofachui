@@ -1130,4 +1130,16 @@ button {
   .dialogue-avatar { width: 56px; height: 56px; font-size: 24px; }
   .trial-box, .verdict-box, .knowledge-box { padding: 24px; margin: 20px; }
   .verdict-header { font-size: 20px; letter-spacing: 4px; }
+  .knowledge-header { padding: 24px 24px 12px; font-size: 18px; letter-spacing: 4px; }
+  .knowledge-content { padding: 16px 24px; }
+  .badge-section { margin: 0 24px 16px; padding: 16px; }
+  .knowledge-footer { padding: 0 24px 24px; }
+}
+@media (max-width: 480px) {
+  .knowledge-box { max-height: 92vh; }
+  .knowledge-header { padding: 20px 16px 10px; font-size: 16px; letter-spacing: 2px; }
+  .knowledge-content { padding: 12px 16px; }
+  .badge-section { margin: 0 16px 12px; padding: 12px; }
+  .knowledge-footer { padding: 0 16px 20px; }
+  .badge-display { width: 60px; height: 60px; font-size: 28px; }
 }
