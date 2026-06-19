@@ -65,7 +65,7 @@ button {
 .screen.active {
   display: flex;
   opacity: 1;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -74,7 +74,7 @@ button {
   background: radial-gradient(ellipse at center, var(--walnut) 0%, var(--bg-dark) 100%);
   align-items: center;
   justify-content: center;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 .loading-content { text-align: center; }
@@ -100,7 +100,7 @@ button {
   justify-content: flex-start;
   min-height: 100vh;
   padding: 60px 20px 40px;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 #start-screen::before {
@@ -218,7 +218,7 @@ button {
   flex-direction: column;
   align-items: center;
   padding: 40px 20px 60px;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   min-height: 100vh;
 }
@@ -365,7 +365,7 @@ button {
 #game-screen {
   flex-direction: column;
   background: var(--bg-dark);
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -605,7 +605,7 @@ button {
   backdrop-filter: blur(2px);
   display: none;
   z-index: 200;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   padding: 60px 20px 40px;
 }
@@ -698,7 +698,7 @@ button {
   backdrop-filter: blur(3px);
   display: none;
   z-index: 250;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   padding: 40px 20px;
 }
@@ -806,7 +806,7 @@ button {
   backdrop-filter: blur(3px);
   display: none;
   z-index: 250;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   padding: 40px 20px;
 }
@@ -954,7 +954,7 @@ button {
   backdrop-filter: blur(4px);
   display: none;
   z-index: 260;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   padding: 40px 20px;
 }
@@ -1047,7 +1047,7 @@ button {
   -webkit-backdrop-filter: blur(6px);
   display: none;
   z-index: 270;
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   padding: 40px 20px;
 }
@@ -1168,7 +1168,7 @@ button {
 @media (max-width: 1024px) {
   .map-cases { flex-direction: column; gap: 20px; }
   .case-card { width: 340px; height: auto; min-height: 200px; }
-  #map-screen { padding: 20px; overflow-y: auto; }
+  #map-screen { padding: 20px; overflow: auto; }
 }
 @media (max-width: 768px) {
   .start-title { font-size: 40px; letter-spacing: 10px; }
@@ -1208,7 +1208,7 @@ button {
 /* ===== 全局手机保护：防止任何页面按钮/文字被截断 ===== */
 @media (max-width: 600px) {
   .screen.active {
-    overflow-y: auto !important;
+    overflow: auto !important;
     -webkit-overflow-scrolling: touch;
   }
   .btn-primary { padding: 12px 32px; font-size: 15px; }
