@@ -27,7 +27,11 @@ class AudioManager {
 
             // 关键：AudioContext 创建后处于 suspended 状态，必须 resume() 才能出声
             if (this.audioContext.state === 'suspended') {
-                this.audioContext.resume();
+                this.audioContext.resume().then(() => {
+                    console.log('🎵 AudioContext 已恢复（resume promise）');
+                }).catch(e => {
+                    console.warn('AudioContext resume 失败:', e);
+                });
             }
 
             this.masterGain = this.audioContext.createGain();
@@ -55,7 +59,7 @@ class AudioManager {
     startBGM() {
         if (!this.initialized || this.bgmPlaying) return;
 
-        // 保险：确保 AudioContext 不在 suspended 状态
+        // 确保 AudioContext 不在 suspended 状态（直接调用，浏览器会立即生效）
         if (this.audioContext.state === 'suspended') {
             this.audioContext.resume();
         }
