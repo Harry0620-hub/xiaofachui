@@ -93,7 +93,7 @@ button {
   background: linear-gradient(160deg, var(--walnut-deep) 0%, var(--ink-cyan) 100%);
   align-items: center;
   justify-content: center;
-  position: relative;
+  /* 不用 position:relative —— 保留 .screen 的 position:fixed 使页面铺满全屏 */
   min-height: 100vh;
 }
 #start-screen::before {
