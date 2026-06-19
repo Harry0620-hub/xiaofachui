@@ -998,30 +998,29 @@ button {
 .knowledge-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 6, 3, 0.9);
-  backdrop-filter: blur(4px);
+  background: rgba(10, 6, 3, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: none;
-  align-items: center;
-  justify-content: center;
   z-index: 270;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 40px 20px;
 }
 .knowledge-overlay.show {
-  display: flex;
-  animation: fadeIn 0.5s ease;
+  display: block;
 }
 .knowledge-box {
   width: 100%;
   max-width: 560px;
-  max-height: 88vh;
   background: linear-gradient(160deg, var(--paper) 0%, var(--cream-dark) 100%);
   border-radius: 8px;
   border: 1px solid var(--gold);
   text-align: center;
   box-shadow: 0 8px 40px rgba(0,0,0,0.4);
   animation: slideUp 0.5s ease;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  margin: 0 auto;
+  padding-bottom: 0;
 }
 
 .knowledge-header {
@@ -1032,15 +1031,11 @@ button {
   letter-spacing: 6px;
   padding: 32px 40px 16px;
   border-bottom: 1px solid rgba(201, 169, 97, 0.2);
-  flex-shrink: 0;
 }
 
 .knowledge-content {
   text-align: left;
   padding: 24px 40px;
-  overflow-y: auto;
-  flex: 1;
-  -webkit-overflow-scrolling: touch;
 }
 
 .badge-section {
@@ -1049,7 +1044,6 @@ button {
   background: rgba(201, 169, 97, 0.08);
   border-radius: 8px;
   border: 1px solid rgba(201, 169, 97, 0.2);
-  flex-shrink: 0;
 }
 
 .knowledge-footer {
@@ -1128,7 +1122,8 @@ button {
   .start-title { font-size: 40px; letter-spacing: 10px; }
   .dialogue-box { padding: 20px; gap: 16px; }
   .dialogue-avatar { width: 56px; height: 56px; font-size: 24px; }
-  .trial-box, .verdict-box, .knowledge-box { padding: 24px; margin: 20px; }
+  .trial-box, .verdict-box { padding: 24px; margin: 20px; }
+  .knowledge-box { padding: 24px 20px; margin: 20px auto; }
   .verdict-header { font-size: 20px; letter-spacing: 4px; }
   .knowledge-header { padding: 24px 24px 12px; font-size: 18px; letter-spacing: 4px; }
   .knowledge-content { padding: 16px 24px; }
@@ -1136,7 +1131,6 @@ button {
   .knowledge-footer { padding: 0 24px 24px; }
 }
 @media (max-width: 480px) {
-  .knowledge-box { max-height: 92vh; }
   .knowledge-header { padding: 20px 16px 10px; font-size: 16px; letter-spacing: 2px; }
   .knowledge-content { padding: 12px 16px; }
   .badge-section { margin: 0 16px 12px; padding: 12px; }
