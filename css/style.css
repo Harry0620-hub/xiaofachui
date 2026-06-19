@@ -1012,27 +1012,49 @@ button {
 .knowledge-box {
   width: 100%;
   max-width: 560px;
+  max-height: 88vh;
   background: linear-gradient(160deg, var(--paper) 0%, var(--cream-dark) 100%);
   border-radius: 8px;
   border: 1px solid var(--gold);
-  padding: 36px 40px;
   text-align: center;
   box-shadow: 0 8px 40px rgba(0,0,0,0.4);
   animation: slideUp 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
+
 .knowledge-header {
   font-family: 'Noto Serif SC', serif;
   font-size: 20px;
   font-weight: 700;
   color: var(--walnut);
   letter-spacing: 6px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
+  padding: 32px 40px 16px;
   border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+  flex-shrink: 0;
 }
+
 .knowledge-content {
   text-align: left;
-  margin-bottom: 28px;
+  padding: 24px 40px;
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+
+.badge-section {
+  margin: 0 40px 20px;
+  padding: 24px;
+  background: rgba(201, 169, 97, 0.08);
+  border-radius: 8px;
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  flex-shrink: 0;
+}
+
+.knowledge-footer {
+  padding: 0 40px 32px;
+  flex-shrink: 0;
 }
 .knowledge-item {
   margin-bottom: 16px;
@@ -1053,13 +1075,6 @@ button {
   font-size: 13px;
   color: var(--gray);
   line-height: 1.8;
-}
-.badge-section {
-  margin-bottom: 28px;
-  padding: 24px;
-  background: rgba(201, 169, 97, 0.08);
-  border-radius: 8px;
-  border: 1px solid rgba(201, 169, 97, 0.2);
 }
 .badge-display {
   width: 80px; height: 80px;
