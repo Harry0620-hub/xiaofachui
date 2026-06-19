@@ -610,11 +610,15 @@ button {
   padding: 60px 20px 40px;
 }
 .dialogue-overlay.show {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
   animation: fadeIn 0.3s ease;
 }
 .dialogue-overlay.show .dialogue-box {
-  margin: 0 auto;
+  margin: auto 0;
 }
 .dialogue-box {
   width: 100%;
@@ -699,11 +703,15 @@ button {
   padding: 40px 20px;
 }
 .evidence-popup-overlay.show {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
   animation: fadeIn 0.3s ease;
 }
 .evidence-popup-overlay.show .evidence-card {
-  margin: 0 auto;
+  margin: auto 0;
 }
 .evidence-card {
   width: 400px;
@@ -803,11 +811,15 @@ button {
   padding: 40px 20px;
 }
 .trial-overlay.show {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
   animation: fadeIn 0.4s ease;
 }
 .trial-overlay.show .trial-box {
-  margin: 0 auto;
+  margin: auto 0;
 }
 .trial-box {
   width: 100%;
@@ -947,11 +959,15 @@ button {
   padding: 40px 20px;
 }
 .verdict-overlay.show {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
   animation: fadeIn 0.5s ease;
 }
 .verdict-overlay.show .verdict-box {
-  margin: 0 auto;
+  margin: auto 0;
 }
 .verdict-box {
   width: 100%;
@@ -1036,8 +1052,16 @@ button {
   padding: 40px 20px;
 }
 .knowledge-overlay.show {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
 }
+.knowledge-overlay.show .knowledge-box {
+  margin: auto 0;
+}
+
 .knowledge-box {
   width: 100%;
   max-width: 560px;
